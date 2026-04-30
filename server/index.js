@@ -3,11 +3,16 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
 dotenv.config({ path: "./server/.env" });
 
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 app.use(cors());
 app.use(express.json());
@@ -57,6 +62,25 @@ app.post("/api/create-checkout-session", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Stripe error" });
+  }
+});
+
+app.get("/api/admin/orders", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Supabase orders error:", error);
+      return res.status(500).json({ error: "Failed to fetch orders" });
+    }
+
+    res.json({ orders: data });
+  } catch (error) {
+    console.error("Admin orders error:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
