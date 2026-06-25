@@ -7,7 +7,7 @@ export default function CTASection() {
           Discover targeted botanical scalp care designed to soothe, refresh, and support healthier-looking hair with every application.
         </p>
         <a
-          href="#"
+          href="/shop"
           className="inline-block rounded-full bg-[#f5c95c] px-8 py-4 font-semibold text-[#7b3327] transition hover:opacity-90"
         >
           Shop Now

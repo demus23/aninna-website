@@ -24,7 +24,7 @@ export default function Shop() {
       quantity
     );
 
-    setAddedMessage(`Added AED{quantity} item(s) to cart`);
+    setAddedMessage(`Added ${quantity} item(s) to cart`);
 
     setTimeout(() => {
       setAddedMessage("");
@@ -128,25 +128,19 @@ export default function Shop() {
               </button>
 
               <button
-  onClick={() => {
-    handleAddToCart();
-    navigate("/cart");
-  }}
-  className="rounded-full border-2 border-[#d4a83e] px-8 py-4 font-semibold text-[#d4a83e] transition hover:bg-[#d4a83e] hover:text-white"
->
-  Buy Now
-</button>
+                onClick={() => {
+                  handleAddToCart();
+                  navigate("/cart");
+                }}
+                className="rounded-full border-2 border-[#d4a83e] px-8 py-4 font-semibold text-[#d4a83e] transition hover:bg-[#d4a83e] hover:text-white"
+              >
+                Buy Now
+              </button>
             </div>
 
             {addedMessage && (
               <p className="mt-4 font-medium text-green-700">{addedMessage}</p>
             )}
-
-            <p className="mt-6 text-sm leading-7 text-[#8a7b72]">
-              This is a front-end shop layout. The cart and payment flow can be
-              connected later with Stripe, Paystack, Flutterwave, Shopify, or a
-              checkout link.
-            </p>
           </div>
         </div>
       </section>
