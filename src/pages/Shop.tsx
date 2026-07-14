@@ -18,7 +18,7 @@ export default function Shop() {
       {
         id: "aninna-serum",
         name: "ANINNA Nourishing Scalp & Hair Serum",
-        price: 67,
+        price: 90,
         image: productImage,
       },
       quantity
@@ -72,7 +72,7 @@ export default function Shop() {
               ANINNA Nourishing Scalp & Hair Serum
             </h2>
 
-            <p className="mb-4 text-2xl font-semibold text-[#2b211d]"> AED 67.00</p>
+            <p className="mb-4 text-2xl font-semibold text-[#2b211d]"> AED 90.00</p>
 
             <p className="mb-8 leading-8 text-[#6f6159]">
               A lightweight alcohol-free formula that blends botanical wisdom
