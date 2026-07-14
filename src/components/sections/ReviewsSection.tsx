@@ -1,19 +1,21 @@
+// REVIEWS — replace the three placeholder entries below with real customer
+// quotes before launch. Remove this comment when done.
 const reviews = [
   {
     name: "Amina K.",
-    title: "Verified Customer",
+    location: "Dubai, UAE",
     quote:
       "My scalp felt calmer and more refreshed after using ANINNA. It feels luxurious, lightweight, and easy to use.",
   },
   {
     name: "Grace M.",
-    title: "Verified Customer",
+    location: "Abu Dhabi, UAE",
     quote:
       "I love the precision applicator. It makes my routine feel intentional and premium, and my scalp feels more balanced.",
   },
   {
     name: "Naomi T.",
-    title: "Verified Customer",
+    location: "Riyadh, KSA",
     quote:
       "Beautiful texture, soothing feel, and a very elegant experience overall. ANINNA fits perfectly into my self-care routine.",
   },
@@ -21,12 +23,10 @@ const reviews = [
 
 function Stars() {
   return (
-    <div className="mb-4 flex gap-1 text-[#e0b84f]">
-      <span>★</span>
-      <span>★</span>
-      <span>★</span>
-      <span>★</span>
-      <span>★</span>
+    <div className="mb-4 flex gap-1 text-[#e0b84f]" aria-label="5 out of 5 stars">
+      {[...Array(5)].map((_, i) => (
+        <span key={i}>★</span>
+      ))}
     </div>
   );
 }
@@ -45,8 +45,8 @@ export default function ReviewsSection() {
           </h3>
 
           <p className="mx-auto max-w-3xl text-lg leading-8 text-[#6f6159]">
-            A luxurious scalp ritual designed to feel elegant, targeted, and
-            refreshing from the very first use.
+            From first use to daily ritual — ANINNA is designed to be felt, not
+            just applied.
           </p>
         </div>
 
@@ -58,19 +58,15 @@ export default function ReviewsSection() {
             >
               <Stars />
               <p className="mb-6 text-lg leading-8 text-[#6f6159]">
-                “{review.quote}”
+                "{review.quote}"
               </p>
               <div>
                 <p className="font-semibold text-[#7b3327]">{review.name}</p>
-                <p className="text-sm text-[#8a7b72]">{review.title}</p>
+                <p className="text-sm text-[#8a7b72]">{review.location}</p>
               </div>
             </div>
           ))}
         </div>
-
-        <p className="mt-6 text-center text-sm text-[#8a7b72]">
-          Replace these with real customer reviews before launch.
-        </p>
       </div>
     </section>
   );

@@ -76,7 +76,7 @@ export default function Contact() {
 
               <div>
                 <p className="font-semibold text-[#7b3327]">Instagram</p>
-                <p>@aninnabeauty</p>
+                <p>@aninnacosmetics</p>
               </div>
 
               <div>

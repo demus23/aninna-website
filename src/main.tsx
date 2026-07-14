@@ -4,12 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { CartProvider } from "./context/CartContext";
+import WhatsAppButton from "./components/layout/WhatsAppButton";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <CartProvider>
         <App />
+        <WhatsAppButton />
       </CartProvider>
     </BrowserRouter>
   </React.StrictMode>
