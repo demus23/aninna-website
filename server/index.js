@@ -24,8 +24,19 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const allowedOrigin = process.env.FRONTEND_URL || "https://aninna.com";
-app.use(cors({ origin: allowedOrigin }));
+const allowedOrigins = [
+  "https://aninna.com",
+  "https://www.aninna.com",
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+}));
 
 // ─── STRIPE WEBHOOK — must be BEFORE express.json() ───────────────────────
 app.post(
