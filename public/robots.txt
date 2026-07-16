@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block admin and checkout pages from search indexing
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /cart
+Disallow: /success
+Disallow: /cancel
+
+Sitemap: https://www.aninna.com/sitemap.xml
