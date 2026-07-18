@@ -116,12 +116,12 @@ export default function Footer() {
             <div className="mt-6">
               <p className="mb-2 text-sm font-semibold text-[#7b3327]">Follow Us</p>
               <a
-                href="https://instagram.com/aninnabeauty"
+                href="https://instagram.com/aninnacosmetics"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[#6f6159] hover:text-[#7b3327]"
               >
-                @aninnabeauty
+                @aninnacosmetics
               </a>
             </div>
           </div>

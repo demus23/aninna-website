@@ -298,7 +298,7 @@ app.post("/api/emx/status-update", async (req, res) => {
       ${isDelivered ? `
       <p style="margin:0;font-size:15px;line-height:1.7;color:#6f6159;">
         We'd love to hear what you think — follow us at
-        <a href="https://instagram.com/aninnabeauty" style="color:#7b3327;">@aninnabeauty</a>
+        <a href="https://instagram.com/aninnacosmetics" style="color:#7b3327;">@aninnacosmetics</a>
         and share your experience.
       </p>` : ""}
     </div>
@@ -413,7 +413,7 @@ app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
     </div>
     <div style="text-align:center;padding:0 0 40px;font-size:14px;color:#8a7b72;line-height:1.8;">
       <p>Questions? <a href="mailto:aninnacosmetic@gmail.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a> or WhatsApp us</p>
-      <p style="margin:4px 0 0;"><a href="https://instagram.com/aninnabeauty" style="color:#7b3327;">@aninnabeauty</a></p>
+      <p style="margin:4px 0 0;"><a href="https://instagram.com/aninnacosmetics" style="color:#7b3327;">@aninnacosmetics</a></p>
     </div>
   </div>
 </body>
