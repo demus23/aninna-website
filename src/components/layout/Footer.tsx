@@ -27,6 +27,7 @@ export default function Footer() {
     <footer className="border-t border-[#eadfce] bg-[#f3ede4]">
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid gap-10 md:grid-cols-4">
+
           {/* Brand */}
           <div>
             <h4 className="text-2xl font-bold text-[#7b3327]">ANINNA</h4>
@@ -40,7 +41,7 @@ export default function Footer() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/971581368771"
+              href="https://wa.me/971000000000"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#d4a83e] px-4 py-2 text-sm font-semibold text-[#7b3327] transition hover:bg-[#d4a83e] hover:text-white"
@@ -71,6 +72,7 @@ export default function Footer() {
               <li><Link to="/about" className="hover:text-[#7b3327]">About</Link></li>
               <li><Link to="/contact" className="hover:text-[#7b3327]">Contact</Link></li>
               <li><Link to="/shipping" className="hover:text-[#7b3327]">Shipping Policy</Link></li>
+              <li><Link to="/returns" className="hover:text-[#7b3327]">Return Policy</Link></li>
               <li><Link to="/privacy" className="hover:text-[#7b3327]">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-[#7b3327]">Terms & Conditions</Link></li>
             </ul>
@@ -111,16 +113,15 @@ export default function Footer() {
               </form>
             )}
 
-            {/* Social */}
             <div className="mt-6">
               <p className="mb-2 text-sm font-semibold text-[#7b3327]">Follow Us</p>
               <a
-                href="https://instagram.com/aninnacosmetics"
+                href="https://instagram.com/aninnabeauty"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[#6f6159] hover:text-[#7b3327]"
               >
-                @aninnacosmetics
+                @aninnabeauty
               </a>
             </div>
           </div>

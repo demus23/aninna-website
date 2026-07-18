@@ -5,11 +5,13 @@ import App from "./App";
 import "./index.css";
 import { CartProvider } from "./context/CartContext";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
+import ScrollToTop from "./components/layout/ScrollToTop";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <CartProvider>
+        <ScrollToTop />
         <App />
         <WhatsAppButton />
       </CartProvider>
