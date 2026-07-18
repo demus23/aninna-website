@@ -123,8 +123,8 @@ app.post(
       </div>
     </div>
     <div style="text-align:center;padding:16px 0 40px;font-size:14px;color:#8a7b72;line-height:1.8;">
-      <p style="margin:0;">Questions? <a href="mailto:hello@aninna.com" style="color:#7b3327;">hello@aninna.com</a> or <a href="https://wa.me/971000000000" style="color:#7b3327;">WhatsApp</a></p>
-      <p style="margin:8px 0 0;">Follow us: <a href="https://instagram.com/aninnabeauty" style="color:#7b3327;">@aninnabeauty</a></p>
+      <p style="margin:0;">Questions? <a href="mailto:aninnacosmetic@gmail.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a> or <a href="https://wa.me/971000000000" style="color:#7b3327;">WhatsApp</a></p>
+      <p style="margin:8px 0 0;">Follow us: <a href="https://instagram.com/aninnacosmetics" style="color:#7b3327;">@aninnacosmetics</a></p>
     </div>
   </div>
 </body>
@@ -303,7 +303,7 @@ app.post("/api/emx/status-update", async (req, res) => {
       </p>` : ""}
     </div>
     <div style="text-align:center;padding:0 0 40px;font-size:14px;color:#8a7b72;">
-      <p>Questions? <a href="mailto:hello@aninna.com" style="color:#7b3327;">hello@aninna.com</a></p>
+      <p>Questions? <a href="mailto:aninnacosmetic@gmail.com.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a></p>
     </div>
   </div>
 </body>
@@ -412,7 +412,7 @@ app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
       </div>
     </div>
     <div style="text-align:center;padding:0 0 40px;font-size:14px;color:#8a7b72;line-height:1.8;">
-      <p>Questions? <a href="mailto:hello@aninna.com" style="color:#7b3327;">hello@aninna.com</a> or WhatsApp us</p>
+      <p>Questions? <a href="mailto:aninnacosmetic@gmail.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a> or WhatsApp us</p>
       <p style="margin:4px 0 0;"><a href="https://instagram.com/aninnabeauty" style="color:#7b3327;">@aninnabeauty</a></p>
     </div>
   </div>

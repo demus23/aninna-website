@@ -87,7 +87,7 @@ export default function Privacy() {
             </h2>
             <p className="leading-8 text-[#6f6159]">
               If you have questions about this Privacy Policy, please contact us
-              at hello@aninna.com.
+              at aninnacosmetic@gmail.com.
             </p>
           </div>
         </div>

@@ -104,10 +104,10 @@ export default function Success() {
             <p className="mb-5 leading-7 text-[#6f6159]">
               Reach us at{" "}
               <a
-                href="mailto:hello@aninna.com"
+                href="mailto:aninnacosmetic@gmail.com"
                 className="font-medium text-[#7b3327] underline underline-offset-2"
               >
-                hello@aninna.com
+                aninnacosmetic@gmail.com
               </a>{" "}
               or WhatsApp — we usually reply within 24 hours.
             </p>

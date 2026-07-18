@@ -71,7 +71,7 @@ export default function Contact() {
             <div className="space-y-5 text-[#6f6159]">
               <div>
                 <p className="font-semibold text-[#7b3327]">Email</p>
-                <p>hello@aninna.com</p>
+                <p>aninnacosmetic@gmail.com</p>
               </div>
 
               <div>

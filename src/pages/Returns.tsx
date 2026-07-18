@@ -57,7 +57,7 @@ export default function Returns() {
               How to Request a Return
             </h2>
             <p className="leading-8 text-[#6f6159]">
-              To initiate a return, please contact us at hello@aninna.com with
+              To initiate a return, please contact us at aninnacosmetic@gmail.com with
               your order details and reason for return. We will respond within
               24 to 48 hours with instructions on how to proceed. Do not send
               items back without contacting us first.
@@ -106,7 +106,7 @@ export default function Returns() {
             </h2>
             <p className="leading-8 text-[#6f6159]">
               For any questions about returns or refunds, please reach out at
-              hello@aninna.com or via WhatsApp. We aim to respond within 24
+              aninnacosmetic@gmail.com or via WhatsApp. We aim to respond within 24
               hours and will do our best to resolve any issue quickly.
             </p>
           </div>

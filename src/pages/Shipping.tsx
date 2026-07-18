@@ -77,7 +77,7 @@ export default function Shipping() {
             </h2>
             <p className="leading-8 text-[#6f6159]">
               If your order arrives damaged or does not arrive within the
-              expected timeframe, please contact us at hello@aninna.com with
+              expected timeframe, please contact us at aninnacosmetic@gmail.com with
               your order details and we will resolve it as quickly as possible.
             </p>
           </div>
@@ -87,7 +87,7 @@ export default function Shipping() {
               Contact
             </h2>
             <p className="leading-8 text-[#6f6159]">
-              For any shipping enquiries, reach us at hello@aninna.com or via
+              For any shipping enquiries, reach us at aninnacosmetic@gmail.com or via
               WhatsApp. We typically respond within 24 hours.
             </p>
           </div>

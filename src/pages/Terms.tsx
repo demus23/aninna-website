@@ -85,7 +85,7 @@ export default function Terms() {
             </h2>
             <p className="leading-8 text-[#6f6159]">
               If you have questions about these Terms & Conditions, please
-              contact us at hello@aninna.com.
+              contact us at aninnacosmetic@gmail.com.
             </p>
           </div>
         </div>
