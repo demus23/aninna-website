@@ -12,6 +12,11 @@ import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import AdminOrders from "./pages/AdminOrders";
+import Blog from "./pages/blog/Blog";
+import DryScalpDubai from "./pages/blog/DryScalpDubai";
+import HairLossUAE from "./pages/blog/HairLossUAE";
+import ScalpSerumVsHairOil from "./pages/blog/ScalpSerumVsHairOil";
+import ScalpCareRoutineGCC from "./pages/blog/ScalpCareRoutineGCC";
 
 function App() {
   return (
@@ -29,6 +34,12 @@ function App() {
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
       <Route path="/admin/orders" element={<AdminOrders />} />
+      {/* Blog */}
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/dry-scalp-dubai-climate" element={<DryScalpDubai />} />
+      <Route path="/blog/hair-loss-uae-women" element={<HairLossUAE />} />
+      <Route path="/blog/scalp-serum-vs-hair-oil" element={<ScalpSerumVsHairOil />} />
+      <Route path="/blog/scalp-care-routine-gcc" element={<ScalpCareRoutineGCC />} />
     </Routes>
   );
 }
