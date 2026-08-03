@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useAnalytics } from "./hooks/useAnalytics";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -19,6 +20,9 @@ import ScalpSerumVsHairOil from "./pages/blog/ScalpSerumVsHairOil";
 import ScalpCareRoutineGCC from "./pages/blog/ScalpCareRoutineGCC";
 
 function App() {
+  // Track every page view automatically
+  useAnalytics();
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -34,7 +38,6 @@ function App() {
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
       <Route path="/admin/orders" element={<AdminOrders />} />
-      {/* Blog */}
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/dry-scalp-dubai-climate" element={<DryScalpDubai />} />
       <Route path="/blog/hair-loss-uae-women" element={<HairLossUAE />} />
