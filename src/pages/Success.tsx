@@ -12,13 +12,13 @@ export default function Success() {
     // Track purchase completion in Google Analytics
     trackEvent("purchase", {
       currency: "AED",
-      value: 67,
+      value: 90,
       transaction_id: new URLSearchParams(window.location.search).get("session_id") || "",
       items: [
         {
           item_id: "aninna-serum",
           item_name: "ANINNA Nourishing Scalp & Hair Serum",
-          price: 67,
+          price: 90,
           quantity: 1,
         },
       ],

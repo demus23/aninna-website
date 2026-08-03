@@ -33,7 +33,7 @@ export function useAnalytics() {
 
 // Track a custom event (purchase, add_to_cart, etc.)
 // Call this from any component:
-// trackEvent("add_to_cart", { value: 67, currency: "AED", item_name: "ANINNA Serum" })
+// trackEvent("add_to_cart", { value: 90, currency: "AED", item_name: "ANINNA Serum" })
 export function trackEvent(eventName: string, params?: Record<string, any>) {
   if (typeof window.gtag !== "function") return;
   window.gtag("event", eventName, params);
