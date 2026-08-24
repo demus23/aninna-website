@@ -1,20 +1,23 @@
 import bottleImage from "../../assets/aninna-bottle.jpg";
-import applicationImage from "../../assets/aninna-application.jpg";
+import applicationVideo from "../../assets/aninna-application.mp4";
 import detailImage from "../../assets/aninna-detail.jpg";
 
 export default function ProductGallerySection() {
-  const images = [
+  const items = [
     {
+      type: "image" as const,
       src: bottleImage,
       alt: "ANINNA serum bottle on a clean background",
       title: "Signature Bottle",
     },
     {
-      src: applicationImage,
+      type: "video" as const,
+      src: applicationVideo,
       alt: "Applying ANINNA scalp serum",
       title: "Targeted Application",
     },
     {
+      type: "image" as const,
       src: detailImage,
       alt: "Close-up detail of ANINNA packaging",
       title: "Luxury Detail",
@@ -39,22 +42,34 @@ export default function ProductGallerySection() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {images.map((image) => (
+        {items.map((item) => (
           <div
-            key={image.title}
+            key={item.title}
             className="overflow-hidden rounded-[2rem] bg-white shadow-sm"
           >
             <div className="aspect-[4/5] overflow-hidden">
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="h-full w-full object-cover transition duration-300 hover:scale-105"
-              />
+              {item.type === "video" ? (
+                <video
+                  src={item.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="h-full w-full object-cover transition duration-300 hover:scale-105"
+                  aria-label={item.alt}
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-full w-full object-cover transition duration-300 hover:scale-105"
+                />
+              )}
             </div>
 
             <div className="p-6">
               <h4 className="text-xl font-semibold text-[#7b3327]">
-                {image.title}
+                {item.title}
               </h4>
             </div>
           </div>
