@@ -6,12 +6,14 @@ import "./index.css";
 import { CartProvider } from "./context/CartContext";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
 import ScrollToTop from "./components/layout/ScrollToTop";
+import PromoBanner from "./components/layout/PromoBanner";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <CartProvider>
         <ScrollToTop />
+        <PromoBanner />
         <App />
         <WhatsAppButton />
       </CartProvider>
