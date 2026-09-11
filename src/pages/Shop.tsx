@@ -80,7 +80,7 @@ export default function Shop() {
             </p>
 
             <p className="mb-8 leading-8 text-[#6f6159]">
-              A lightweight alcohol-free formula that blends botanical wisdom
+              A lightweight Drying alcohol-free formula that blends botanical wisdom
               with modern precision to help nourish the scalp, support comfort,
               and promote healthier-looking hair from the root.
             </p>
@@ -92,7 +92,7 @@ export default function Shop() {
               </div>
               <div className="rounded-2xl bg-[#f8f5ef] p-4">
                 <p className="font-semibold text-[#7b3327]">Formula</p>
-                <p className="text-[#6f6159]">Alcohol-Free</p>
+                <p className="text-[#6f6159]">Water-Base</p>
               </div>
               <div className="rounded-2xl bg-[#f8f5ef] p-4">
                 <p className="font-semibold text-[#7b3327]">Use</p>

@@ -132,13 +132,13 @@ export default function ScalpCareRoutineGCC() {
             <p className="mb-8 text-lg leading-8 text-white/85">
               Alcohol-free leave-in serum with a precision rollerball applicator.
               Designed for consistent daily scalp care in the UAE and GCC climate.
-              AED 90 · Delivered across UAE.
+              AED 99 · Delivered across UAE.
             </p>
             <Link
               to="/shop"
               className="inline-block rounded-full bg-[#f5c95c] px-8 py-4 font-semibold text-[#7b3327] transition hover:opacity-90"
             >
-              Shop Now — AED 90
+              Shop Now — AED 99
             </Link>
           </div>
 

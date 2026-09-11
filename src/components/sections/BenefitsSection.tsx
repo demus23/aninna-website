@@ -16,7 +16,7 @@ const benefits = [
     description: "A thoughtful blend of plant extracts and modern actives supports a healthier scalp environment.",
   },
   {
-    title: "Lightweight Alcohol-Free Formula",
+    title: "Lightweight Water-Base Formula",
     description: "Created for regular use with a formula that feels elegant, clean, and easy to layer into your routine.",
   },
   {

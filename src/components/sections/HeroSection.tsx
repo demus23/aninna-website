@@ -44,7 +44,7 @@ export default function HeroSection() {
 
             <div>
               <p className="text-3xl font-bold text-[#7b3327]">100%</p>
-              <p className="text-sm text-[#6f6159]">Alcohol-Free</p>
+              <p className="text-sm text-[#6f6159]">Water Base</p>
             </div>
 
             <div>

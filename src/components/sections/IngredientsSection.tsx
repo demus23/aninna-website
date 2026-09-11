@@ -93,7 +93,7 @@ export default function IngredientsSection() {
       </div>
 
       <p className="mt-8 text-center text-sm text-[#8a7b72]">
-        ANINNA is formulated without alcohol, parabens, or artificial fragrance.
+        ANINNA is formulated without drying alcohol, parabens, or artificial fragrance.
       </p>
     </section>
   );
