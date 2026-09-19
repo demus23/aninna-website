@@ -19,6 +19,8 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const OWNER_EMAIL = "aninnacosmetic@gmail.com"; // where YOU get notified of new orders
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -27,6 +29,8 @@ const supabase = createClient(
 const allowedOrigins = [
   "https://aninna.com",
   "https://www.aninna.com",
+  "http://localhost:5173",
+  "http://localhost:5174",
 ];
 app.use(cors({
   origin: (origin, callback) => {
@@ -77,20 +81,20 @@ app.post(
         apartment: metadata.apartment || "",
         notes: metadata.notes || "",
         items: metadata.items ? JSON.parse(metadata.items) : [],
-        shipping_status: "pending",   // NEW: shipping lifecycle field
+        shipping_status: "pending",
         tracking_number: null,
       });
 
       if (dbError) console.error("Supabase order insert error:", dbError);
       else console.log("Order saved:", session.id);
 
-      // Send order confirmation email
+      // ── 1. Send order confirmation email to CUSTOMER ──
       if (customerEmail && process.env.RESEND_API_KEY) {
         try {
           await resend.emails.send({
             from: "ANINNA <orders@aninna.com>",
             to: customerEmail,
-            subject: "Your ANINNA Order is Confirmed ✓",
+            subject: "Your ANINNA Order is Confirmed \u2713",
             html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +127,7 @@ app.post(
       </div>
     </div>
     <div style="text-align:center;padding:16px 0 40px;font-size:14px;color:#8a7b72;line-height:1.8;">
-      <p style="margin:0;">Questions? <a href="mailto:aninnacosmetic@gmail.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a> or <a href="https://wa.me/971000000000" style="color:#7b3327;">WhatsApp</a></p>
+      <p style="margin:0;">Questions? <a href="mailto:${OWNER_EMAIL}" style="color:#7b3327;">${OWNER_EMAIL}</a> or <a href="https://wa.me/971000000000" style="color:#7b3327;">WhatsApp</a></p>
       <p style="margin:8px 0 0;">Follow us: <a href="https://instagram.com/aninnacosmetics" style="color:#7b3327;">@aninnacosmetics</a></p>
     </div>
   </div>
@@ -133,6 +137,44 @@ app.post(
           console.log("Confirmation email sent to:", customerEmail);
         } catch (emailErr) {
           console.error("Email error:", emailErr);
+        }
+      }
+
+      // ── 2. Notify YOU (the owner) by email of every new order ──
+      if (process.env.RESEND_API_KEY) {
+        try {
+          await resend.emails.send({
+            from: "ANINNA Orders <orders@aninna.com>",
+            to: OWNER_EMAIL,
+            subject: `New Order — ${currency} ${amount.toFixed(2)} from ${customerName}`,
+            html: `
+              <div style="font-family:sans-serif;max-width:480px;margin:0 auto;">
+                <h2 style="color:#7b3327;">New ANINNA Order</h2>
+                <p><strong>Customer:</strong> ${customerName}</p>
+                <p><strong>Email:</strong> ${customerEmail}</p>
+                <p><strong>Phone:</strong> ${metadata.phone || "—"}</p>
+                <p><strong>Amount:</strong> ${currency} ${amount.toFixed(2)}</p>
+                <p><strong>Address:</strong> ${metadata.address || ""}, ${metadata.city || ""}, ${metadata.country || ""}</p>
+                <p><a href="https://www.aninna.com/admin/orders" style="color:#7b3327;">View in Admin Panel →</a></p>
+              </div>
+            `,
+          });
+        } catch (ownerEmailErr) {
+          console.error("Owner notification email error:", ownerEmailErr);
+        }
+      }
+
+      // ── 3. Notify YOU by WhatsApp (optional — only runs if configured) ──
+      if (process.env.CALLMEBOT_PHONE && process.env.CALLMEBOT_API_KEY) {
+        try {
+          const whatsappMessage = encodeURIComponent(
+            `New ANINNA order!\n${customerName}\n${currency} ${amount.toFixed(2)}\n${metadata.city || ""}, ${metadata.country || ""}`
+          );
+          await fetch(
+            `https://api.callmebot.com/whatsapp.php?phone=${process.env.CALLMEBOT_PHONE}&text=${whatsappMessage}&apikey=${process.env.CALLMEBOT_API_KEY}`
+          );
+        } catch (waErr) {
+          console.error("WhatsApp notification error:", waErr);
         }
       }
     }
@@ -166,8 +208,9 @@ app.post("/api/create-checkout-session", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      success_url: "https://aninna.com/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://aninna.com/cancel",
+      allow_promotion_codes: true,
+     success_url: `${process.env.FRONTEND_URL || "https://aninna.com"}/success?session_id={CHECKOUT_SESSION_ID}`,
+cancel_url: `${process.env.FRONTEND_URL || "https://aninna.com"}/cancel`,
       customer_email: customer.email,
       metadata: {
         fullName: customer.fullName || "",
@@ -221,14 +264,11 @@ app.post("/api/newsletter", async (req, res) => {
 });
 
 // ─── EMX: STATUS UPDATE WEBHOOK (Emirates Post calls this) ────────────────
-// Give this URL to the Emirates Post IT team:
-// https://aninna-api.onrender.com/api/emx/status-update
 app.post("/api/emx/status-update", async (req, res) => {
   try {
     const update = parseEMXStatusUpdate(req.body);
     console.log("EMX status update received:", update);
 
-    // Find the order by reference number (which is our order.id)
     const { data: orders } = await supabase
       .from("orders")
       .select("*")
@@ -236,7 +276,6 @@ app.post("/api/emx/status-update", async (req, res) => {
       .single();
 
     if (orders) {
-      // Map EMX statuses to our internal statuses
       const statusMap = {
         "Shipment Created": "created",
         "Shipment Picked up by Courier": "picked_up",
@@ -257,7 +296,6 @@ app.post("/api/emx/status-update", async (req, res) => {
         })
         .eq("id", update.referenceNumber);
 
-      // Email customer when out for delivery or delivered
       if (
         (update.status === "Out for Delivery" || update.status === "Shipment Delivered") &&
         orders.email
@@ -268,8 +306,8 @@ app.post("/api/emx/status-update", async (req, res) => {
             from: "ANINNA <orders@aninna.com>",
             to: orders.email,
             subject: isDelivered
-              ? "Your ANINNA Order Has Been Delivered ✓"
-              : "Your ANINNA Order Is Out for Delivery 🚚",
+              ? "Your ANINNA Order Has Been Delivered \u2713"
+              : "Your ANINNA Order Is Out for Delivery",
             html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -303,7 +341,7 @@ app.post("/api/emx/status-update", async (req, res) => {
       </p>` : ""}
     </div>
     <div style="text-align:center;padding:0 0 40px;font-size:14px;color:#8a7b72;">
-      <p>Questions? <a href="mailto:aninnacosmetic@gmail.com.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a></p>
+      <p>Questions? <a href="mailto:${OWNER_EMAIL}" style="color:#7b3327;">${OWNER_EMAIL}</a></p>
     </div>
   </div>
 </body>
@@ -315,7 +353,6 @@ app.post("/api/emx/status-update", async (req, res) => {
       }
     }
 
-    // Emirates Post expects this exact response
     res.json({ errorCode: null, errorMsg: null, status: "Success" });
   } catch (err) {
     console.error("EMX status update error:", err);
@@ -336,12 +373,10 @@ app.get("/api/admin/orders", requireAdmin, async (req, res) => {
 });
 
 // ─── ADMIN: CREATE EMX SHIPMENT ────────────────────────────────────────────
-// Called from the admin panel "Create Shipment" button
 app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
   try {
     const { orderId } = req.params;
 
-    // Fetch the order
     const { data: order, error: fetchError } = await supabase
       .from("orders")
       .select("*")
@@ -351,14 +386,12 @@ app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
     if (fetchError || !order) return res.status(404).json({ error: "Order not found" });
     if (order.tracking_number) return res.status(400).json({ error: "Order already shipped" });
 
-    // Call Emirates Post API
     const result = await createEMXBooking(order);
 
     if (!result.success) {
       return res.status(500).json({ error: result.error });
     }
 
-    // Save tracking number to Supabase
     await supabase
       .from("orders")
       .update({
@@ -369,13 +402,12 @@ app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
       })
       .eq("id", orderId);
 
-    // Send shipping notification email to customer
     if (order.email && process.env.RESEND_API_KEY) {
       try {
         await resend.emails.send({
           from: "ANINNA <orders@aninna.com>",
           to: order.email,
-          subject: "Your ANINNA Order Has Been Shipped 📦",
+          subject: "Your ANINNA Order Has Been Shipped",
           html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -412,7 +444,7 @@ app.post("/api/admin/orders/:orderId/ship", requireAdmin, async (req, res) => {
       </div>
     </div>
     <div style="text-align:center;padding:0 0 40px;font-size:14px;color:#8a7b72;line-height:1.8;">
-      <p>Questions? <a href="mailto:aninnacosmetic@gmail.com" style="color:#7b3327;">aninnacosmetic@gmail.com.com</a> or WhatsApp us</p>
+      <p>Questions? <a href="mailto:${OWNER_EMAIL}" style="color:#7b3327;">${OWNER_EMAIL}</a> or WhatsApp us</p>
       <p style="margin:4px 0 0;"><a href="https://instagram.com/aninnacosmetics" style="color:#7b3327;">@aninnacosmetics</a></p>
     </div>
   </div>
